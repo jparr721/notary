@@ -1,0 +1,20 @@
+#!/bin/bash
+
+shellname=""
+
+if [ $SHELL == "/usr/bin/zsh" ];
+then
+  shellname="$HOME/.zshrc"
+elif [ $SHELL == "/usr/bin/bash" ];
+then
+  shellname="$HOME/.bashrc"
+fi
+
+echo $shellname
+
+notary_command="echo \"# \$(date)\" >> $HOME/notary.md && echo '' >> $HOME/notary.md && \$EDITOR $HOME/notary.md"
+notary_del_command="rm -rf $HOME/notary.md"
+
+echo "alias notary='$notary_command'" >> $shellname
+echo "alias notary_rm='$notary_del_command'" >> $shellname
+
